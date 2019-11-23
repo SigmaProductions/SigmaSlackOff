@@ -8,19 +8,7 @@ import { Room } from '../models/room.model';
 export class DataService{
     constructor(private httpClient: HttpClient){}
 
-    createRandom(){
-        let randoms: Room[];
-        randoms=[];
-        for(var i=0; i<10; i++){
-            var lobb= new Room();
-            lobb.game="dfd";
-            randoms.push(lobb);
-        }
-        return randoms;
-    }
-
     getData(){
         return this.httpClient.get<Array<Room>>("https://localhost:5001/api/Room/getrooms");
-        
     }
 }
