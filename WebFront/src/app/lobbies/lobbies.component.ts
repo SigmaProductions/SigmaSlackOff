@@ -4,8 +4,8 @@ import { DataService } from './data.service';
 import {Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoginComponent } from '../login/login.component';
-import { User } from '../login/user';
 import { DxListComponent } from 'devextreme-angular';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-lobbies',
@@ -14,18 +14,20 @@ import { DxListComponent } from 'devextreme-angular';
 })
 export class LobbiesComponent implements OnInit {
   data: Array<Room>;
-  selectedItems: Room;
+  selectedItems: any[]=[];
 
   constructor(private dataService: DataService, private router:Router, private httpClient: HttpClient) { 
     this.dataService.getData().toPromise().then((val)=>{this.data= val});
   }
   joinClick(e){ 
-    this.httpClient.put("https://localhost:5001/api/Room/assignUser",
-        {roomId: this.selectedItems.id, userId : User.Username});
+    var id= (this.selectedItems[0] as Room).id;
+
+    console.log(id);
+    this.httpClient.put("https://localhost:5001/api/Room/assignUser"+ "?roomId="+ id.toString()+ 
+      "&userId=" + LoginComponent.user.id.toString(), null);
     this.router.navigateByUrl('/cool');
   }
   ngOnInit() {
-    this.selectedItems = new Room();
   }
 
 }
