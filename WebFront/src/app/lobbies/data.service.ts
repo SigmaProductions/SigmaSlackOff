@@ -10,6 +10,5 @@ export class DataService{
 
     getData(){
         return this.httpClient.get<Array<Room>>("https://localhost:5001/api/Room/getrooms");
-        
     }
 }

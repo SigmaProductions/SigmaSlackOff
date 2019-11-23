@@ -1,13 +1,12 @@
-<div id="listBox">
-<dx-list 
-[showSelectionControls]="true"
-selectionMode="single"
->
-        <dxi-item *ngFor="let item of data" >
-            <div id="game">{{item.game}}</div>
-            <div>{{item.date}}</div>
-
-        </dxi-item>
-    </dx-list>
-    <dx-button id="join" (onClick)="joinClick($event)" >Dołącz</dx-button>
+<div id="loginOverlay" class="overlay">
+    <div class="form" id="loginWindow">
+        <div id="listBox">
+            <dx-list [showSelectionControls]="true" selectionMode="single">
+                <dxi-item *ngFor="let item of data">
+                    <div id="game">{{item.game}}</div>
+                </dxi-item>
+            </dx-list>
+            <dx-button id="join" (onClick)="joinClick($event)">Dołącz</dx-button>
+        </div>
+    </div>
 </div>

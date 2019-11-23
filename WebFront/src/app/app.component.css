@@ -1,21 +1,23 @@
 #overlay{
     display: grid;
-    grid-template-columns: 10px 200px auto;
-    grid-template-rows: 15px 200px auto;
+    grid-template-columns: 300px  200px 200px 200px auto;
+    grid-template-rows: 300px 200px 200px auto;
     background-color: orange;
     background-image: url("src\assets\catground.png");
     background-size: cover;
 }
 #logo{
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 3;
+    height:200px;
+    width: 200px;
+    margin: 10px 10px 10px 10px;
+    grid-column: 1;
+    grid-row: 1;
     background-image: url("src\assets\logoSSO.png");
 }
 
 #loginWindow{
-    grid-area: 2 / 2 / 3 / 4;
+    grid-area: 2 / 3 / 2 / 2;
+    text-align: center;
     
 }
 
