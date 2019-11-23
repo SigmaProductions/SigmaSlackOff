@@ -11,14 +11,14 @@ namespace matcher
         {
             preferences = new Collection<UserPreference>();
         }
-
-        public string Id { get; set; }
+        
+        public int Id { get; set; }
         public string name { get; set; }
         
         public string password { get; set; }
 
-        public Room room { get; set; }
-        public ICollection<UserPreference> preferences { get; set; }
+        public  Room room { get; set; }
+        public  ICollection<UserPreference> preferences { get; set; }
 
     }
 }
