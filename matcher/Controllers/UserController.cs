@@ -11,37 +11,39 @@ namespace sigmaslackoff.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
+        private ApplicationDbContext _context;
         public UserController()
         {
+            _context = new ApplicationDbContext(
+                new Microsoft.EntityFrameworkCore.DbContextOptions<ApplicationDbContext>());
+        }
 
+        [HttpGet]
+        [Route("getusers")]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(_context.Users.ToList());
         }
         [HttpGet]
-        public async Task<IActionResult> GetUsers()//IEnumerable<User> GetUsers()
+        [Route("login")]
+        public async Task<IActionResult> Login(string id, string pw)
         {
-            //return from i in users
-            //       select i;
-            return Ok("jsjsjsjjsjs");
+            var user = _context.Users.Find(id);
+            if (user.password == pw) 
+            {
+                return Ok();
+            }
+            return Conflict("Bad password");
         }
-        [Route("getusers")]
-        public async Task<IActionResult> Get()//string Get(string name)
-        {
-            //return from i in users
-            //      where name = i.name
-            //      select i;
-            return Ok();
-        }
-
         [HttpPost]
+        [Route("add")]
         public async Task<IActionResult> AddUser(User user)
         {
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
             return Ok();
 
         }
-        
-        //[HttpPost]
-        //public void CreateRoom(Room room)
-        //{
 
-        //}
     }
 }

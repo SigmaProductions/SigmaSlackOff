@@ -9,8 +9,8 @@ using sigmaslackoff;
 namespace matcher.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191122202445_AddItems")]
-    partial class AddItems
+    [Migration("20191122235329_new")]
+    partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,11 +40,9 @@ namespace matcher.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("password")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("roomId")
@@ -60,7 +58,7 @@ namespace matcher.Migrations
             modelBuilder.Entity("sigmaslackoff.User", b =>
                 {
                     b.HasOne("sigmaslackoff.Room", "room")
-                        .WithMany("user")
+                        .WithMany("users")
                         .HasForeignKey("roomId");
                 });
 #pragma warning restore 612, 618
