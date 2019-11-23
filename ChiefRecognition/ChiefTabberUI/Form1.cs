@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 using ChiefTabberUI.Properties;
+using OpenQA.Selenium.Remote;
 
 namespace ChiefTabberUI
 {
@@ -51,7 +52,7 @@ namespace ChiefTabberUI
         {
             InitializeComponent();
             this.hubConnection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:44354/homehub")
+                .WithUrl("http://localhost:5000/homehub")
                 .Build();
            this.hubConnection.On("HideWindows", () =>
             {
@@ -87,33 +88,42 @@ namespace ChiefTabberUI
                 options.AddExcludedArgument("enable-automation");
                 options.AddAdditionalCapability("useAutomationExtension", false);
                 options.AddArgument("--kiosk");
-                using (var driver = new FirefoxDriver())
-                {
-                    driver.Navigate().GoToUrl("http://hackertyper.com");
-                    var console = driver.FindElementById("console");
-                    console.Click();
-                    Actions actiddon = new Actions(driver);
-                    actiddon.SendKeys("{F11}");
-                    actiddon.Perform();
-                    while (true)
+                var i = 1;
+                    switch (i)
                     {
-                        try
-                        {
-                            Actions action = new Actions(driver);
-                            action.SendKeys("d");
-                            action.Perform();
-                        }
-                        catch (Exception)
-                        {
+                        case 1:
+                            using (var driver = new FirefoxDriver()) { HackerTyper(driver); };
                             break;
-                        }
-                       
+                        case 2:
+                            using (var driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))) { HackerTyper(driver); };
+                            break;
                     }
+
                 }
-                }  //Thread.Sleep(1);
             });
         }
-
+    public void HackerTyper(RemoteWebDriver driver)
+    {
+        driver.Navigate().GoToUrl("http://hackertyper.com");
+        var console = driver.FindElementById("console");
+        console.Click();
+        Actions actiddon = new Actions(driver);
+        actiddon.SendKeys("{F11}");
+        actiddon.Perform();
+        while (true)
+        {
+            try
+            {
+                Actions action = new Actions(driver);
+                action.SendKeys("d");
+                action.Perform();
+            }
+            catch (Exception)
+            {
+                break;
+            }
+        }
+    }
         private void button2_Click(object sender, EventArgs e)
         {
             Task.Run(async () =>
