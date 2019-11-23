@@ -32,7 +32,7 @@ namespace ChiefRecognition
                     await comparer.IsSimillarFaceOnSourceImage(connection);
 
                 }).GetAwaiter().GetResult();
-                Thread.Sleep(5000);
+                Thread.Sleep(1000);
                 Console.WriteLine("Hello World!");
             }
         }
