@@ -1,4 +1,7 @@
-<dx-list >
+<dx-list [(selectedItems)]="selectedItems"
+[showSelectionControls]="true"
+selectionMode="single"
+>
         <dxi-item *ngFor="let item of data" >
             <div id="game">{{item.game}}</div>
         </dxi-item>
