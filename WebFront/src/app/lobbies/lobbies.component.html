@@ -1,7 +1,6 @@
-
-<dx-data-grid id="gridContainer"
-[dataSource]="data"
-[remoteOperations]="false"
-[allowColumnReordering]="true"
-[rowAlternationEnabled]="true"
-[showBorders]="true"></dx-data-grid>
+<dx-list >
+        <dxi-item *ngFor="let item of data" >
+            <h2>{{item.name}}</h2>
+        </dxi-item>
+    </dx-list>
+    <dx-button id="join" (onClick)="joinClick($event)">Dołącz</dx-button>

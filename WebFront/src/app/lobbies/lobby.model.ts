@@ -1,5 +1,5 @@
 
 export class Lobby{
-    name:string;
+    name: string;
     game: string;
 }
