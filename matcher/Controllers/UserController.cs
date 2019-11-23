@@ -17,7 +17,7 @@ namespace matcher.Controllers
         private readonly IHubContext<HomeHub> _hubContext;
         public UserController(IHubContext<HomeHub> hubContext)
         {
-
+            _hubContext = hubContext;
         }
 
         [HttpGet]
