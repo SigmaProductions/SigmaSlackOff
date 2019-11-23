@@ -30,6 +30,8 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.CheckboxHackerTyper = new System.Windows.Forms.CheckBox();
+            this.CheckboxPlayKeyboardSound = new System.Windows.Forms.CheckBox();
             // 
             // button1
             // 
@@ -50,11 +52,33 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // CheckboxHackerTyper
+            // 
+            this.CheckboxHackerTyper.AutoSize = true;
+            this.CheckboxHackerTyper.Location = new System.Drawing.Point(74, 79);
+            this.CheckboxHackerTyper.Name = "CheckboxHackerTyper";
+            this.CheckboxHackerTyper.Size = new System.Drawing.Size(166, 24);
+            this.CheckboxHackerTyper.TabIndex = 2;
+            this.CheckboxHackerTyper.Text = "Display HackerTyper";
+            this.CheckboxHackerTyper.UseVisualStyleBackColor = true;
+            // 
+            // CheckboxPlayKeyboardSound
+            // 
+            this.CheckboxPlayKeyboardSound.AutoSize = true;
+            this.CheckboxPlayKeyboardSound.Location = new System.Drawing.Point(74, 124);
+            this.CheckboxPlayKeyboardSound.Name = "CheckboxPlayKeyboardSound";
+            this.CheckboxPlayKeyboardSound.Size = new System.Drawing.Size(168, 24);
+            this.CheckboxPlayKeyboardSound.TabIndex = 3;
+            this.CheckboxPlayKeyboardSound.Text = "Play keyboard sound";
+            this.CheckboxPlayKeyboardSound.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.CheckboxPlayKeyboardSound);
+            this.Controls.Add(this.CheckboxHackerTyper);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
@@ -67,6 +91,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBoxTimeMinimized;
+        private System.Windows.Forms.CheckBox CheckboxHackerTyper;
+        private System.Windows.Forms.CheckBox CheckboxPlayKeyboardSound;
     }
 }
 
