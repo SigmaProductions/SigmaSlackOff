@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace sigmaslackoff.Controllers
+namespace matcher.Controllers
 {
     [Route("api/[controller]")]
     public class RoomController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         public RoomController()
         {
             _context = new ApplicationDbContext(
@@ -29,6 +29,7 @@ namespace sigmaslackoff.Controllers
         [Route("add")]
         public async Task<IActionResult> AddRoom(Room room)
         {
+            room.Id = (_context.Rooms.Count<Room>() + 1).ToString();
             _context.Rooms.Add(room);
             await _context.SaveChangesAsync();
             return Ok();

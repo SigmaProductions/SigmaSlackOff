@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace sigmaslackoff.Controllers
+namespace matcher.Controllers
 {
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         public UserController()
         {
             _context = new ApplicationDbContext(
@@ -39,11 +39,30 @@ namespace sigmaslackoff.Controllers
         [Route("add")]
         public async Task<IActionResult> AddUser(User user)
         {
+            user.Id = (_context.Users.Count<User>() + 1).ToString();
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return Ok();
 
         }
-
+        [HttpPut]
+        [Route("assignpreference")]
+        public async Task<IActionResult> AssignPreference(string preferenceId, string userId)
+        {
+            var preference = _context.UserPreferences.Find(preferenceId);
+            var user = _context.Users.Find(userId);
+            if (preference == null)
+            {
+                return NotFound("Preference not found");
+            }
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+            preference.user = user;
+            user.preferences.Add(preference);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }

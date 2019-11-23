@@ -1,21 +1,20 @@
-﻿using System;
+﻿using matcher;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace matcher
 {
-    public class Room
+    public class UserPreference
     {
-        public Room()
+        public UserPreference()
         {
             this.time = DateTime.Now;
-            users = new Collection<User>();
         }
-
         public string Id { get; set; }
-        public ICollection<User> users { get; set; }
         public string game { get; set; }
         public DateTime time { get; set; }
-
+        public User user { get; set; }
     }
 }
