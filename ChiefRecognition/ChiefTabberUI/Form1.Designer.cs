@@ -92,6 +92,7 @@
             this.ButtonCommit.TabIndex = 5;
             this.ButtonCommit.Text = "Make random commit";
             this.ButtonCommit.UseVisualStyleBackColor = true;
+            this.ButtonCommit.Click += new System.EventHandler(this.ButtonCommit_Click_1);
             // 
             // Form1
             // 
