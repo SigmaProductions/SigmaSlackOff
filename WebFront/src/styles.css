@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+
+.orangeBackground{
+    background: #ff9f00; 
+}
+
+.greyBackground{
+    background: #56524a;
+    color: white;
+}
+
+.blueBackground{
+    background: #1c62c0;
+}
+
+html * {
+    color: #56524a;
+    font-family: Arial, Helvetica, sans-serif;
+}
+

@@ -1,0 +1,20 @@
+<div class="form" id="loginWindow">
+        <div class="dx-fieldset">
+            <div class="dx-field">
+                <div class="dx-field-label">Wprowadź login:</div>
+                <div class="dx-field-value" >
+                    <dx-text-box [(value)]="userNickname"></dx-text-box>
+
+                </div>
+            </div>
+            <div class="dx-field">
+                <div class="dx-field-label">Wprowadź hasło:</div>
+                <div class="dx-field-value">
+                    <dx-text-box [(value)]="userPassword" mode="password" [showClearButton]="true">
+                    </dx-text-box>
+                </div>
+            </div>
+        </div>
+
+        <dx-button id="loginButton" (onClick)="login($event)">Login</dx-button>
+</div>
