@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace ChiefTabber
 {
@@ -16,9 +18,22 @@ namespace ChiefTabber
 
         static void Main(string[] args)
         {
-            IntPtr lHwnd = FindWindow("Shell_TrayWnd", null);
-            SendMessage(lHwnd, WM_COMMAND, (IntPtr)MIN_ALL, IntPtr.Zero);
-            Thread.Sleep(1000);
+            var connection = new HubConnectionBuilder()
+                .WithUrl("https://localhost:44354/homehub")
+                .Build();
+            connection.On("HideWindows", () =>
+                {
+                    IntPtr lHwnd = FindWindow("Shell_TrayWnd", null);
+                    SendMessage(lHwnd, WM_COMMAND, (IntPtr)MIN_ALL, IntPtr.Zero);
+                    Thread.Sleep(1000);
+                });
+            Task.Run(async () =>
+            {
+                await connection.StartAsync();
+
+            }).GetAwaiter().GetResult();
+            while (true) { } ;
+            
         }
     }
 }
