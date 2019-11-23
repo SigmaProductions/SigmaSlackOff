@@ -5,10 +5,6 @@ import {Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoginComponent } from '../login/login.component';
 import { DxListComponent } from 'devextreme-angular';
-<<<<<<< HEAD
-
-=======
->>>>>>> 51422d44b3dd73b7f54fab68f6fd3c0df47a1088
 
 @Component({
   selector: 'app-lobbies',
