@@ -34,6 +34,9 @@
             this.CheckboxPlayKeyboardSound = new System.Windows.Forms.CheckBox();
             this.CheckboxCommit = new System.Windows.Forms.CheckBox();
             this.ButtonCommit = new System.Windows.Forms.Button();
+            this.CheckboxStockMarket = new System.Windows.Forms.CheckBox();
+            this.CheckboxProgram = new System.Windows.Forms.CheckBox();
+            this.ButtonBrowse = new System.Windows.Forms.Button();
             // 
             // button1
             // 
@@ -94,11 +97,44 @@
             this.ButtonCommit.UseVisualStyleBackColor = true;
             this.ButtonCommit.Click += new System.EventHandler(this.ButtonCommit_Click_1);
             // 
+            // CheckboxStockMarket
+            // 
+            this.CheckboxStockMarket.AutoSize = true;
+            this.CheckboxStockMarket.Location = new System.Drawing.Point(319, 79);
+            this.CheckboxStockMarket.Name = "CheckboxStockMarket";
+            this.CheckboxStockMarket.Size = new System.Drawing.Size(170, 24);
+            this.CheckboxStockMarket.TabIndex = 6;
+            this.CheckboxStockMarket.Text = "Display Stock Market";
+            this.CheckboxStockMarket.UseVisualStyleBackColor = true;
+            // 
+            // CheckboxProgram
+            // 
+            this.CheckboxProgram.AutoSize = true;
+            this.CheckboxProgram.Location = new System.Drawing.Point(319, 124);
+            this.CheckboxProgram.Name = "CheckboxProgram";
+            this.CheckboxProgram.Size = new System.Drawing.Size(128, 24);
+            this.CheckboxProgram.TabIndex = 7;
+            this.CheckboxProgram.Text = "Open Program";
+            this.CheckboxProgram.UseVisualStyleBackColor = true;
+            // 
+            // ButtonBrowse
+            // 
+            this.ButtonBrowse.Location = new System.Drawing.Point(453, 124);
+            this.ButtonBrowse.Name = "ButtonBrowse";
+            this.ButtonBrowse.Size = new System.Drawing.Size(94, 29);
+            this.ButtonBrowse.TabIndex = 8;
+            this.ButtonBrowse.Text = "Browse...";
+            this.ButtonBrowse.UseVisualStyleBackColor = true;
+            this.ButtonBrowse.Click += new System.EventHandler(this.ButtonBrowse_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ButtonBrowse);
+            this.Controls.Add(this.CheckboxProgram);
+            this.Controls.Add(this.CheckboxStockMarket);
             this.Controls.Add(this.ButtonCommit);
             this.Controls.Add(this.CheckboxCommit);
             this.Controls.Add(this.CheckboxPlayKeyboardSound);
@@ -119,6 +155,9 @@
         private System.Windows.Forms.CheckBox CheckboxPlayKeyboardSound;
         private System.Windows.Forms.CheckBox CheckboxCommit;
         private System.Windows.Forms.Button ButtonCommit;
+        private System.Windows.Forms.CheckBox CheckboxStockMarket;
+        private System.Windows.Forms.CheckBox CheckboxProgram;
+        private System.Windows.Forms.Button ButtonBrowse;
     }
 }
 

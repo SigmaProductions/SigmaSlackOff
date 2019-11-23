@@ -121,4 +121,10 @@
   <data name="keyboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\keyboard.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="_74612518_574041090025385_6028773377815085056_n" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\74612518_574041090025385_6028773377815085056_n.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_77279954_523486831834093_4727520221248618496_n" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\77279954_523486831834093_4727520221248618496_n.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

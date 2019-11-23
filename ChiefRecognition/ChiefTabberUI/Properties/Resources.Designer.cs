@@ -61,6 +61,26 @@ namespace ChiefTabberUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _74612518_574041090025385_6028773377815085056_n {
+            get {
+                object obj = ResourceManager.GetObject("_74612518_574041090025385_6028773377815085056_n", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _77279954_523486831834093_4727520221248618496_n {
+            get {
+                object obj = ResourceManager.GetObject("_77279954_523486831834093_4727520221248618496_n", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream keyboard {

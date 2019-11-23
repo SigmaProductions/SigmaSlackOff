@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Media;
 using ChiefTabberUI.Properties;
 using OpenQA.Selenium.Remote;
+using System.Diagnostics;
 
 namespace ChiefTabberUI
 {
@@ -26,6 +27,7 @@ namespace ChiefTabberUI
         const int WM_COMMAND = 0x111;
         const int MIN_ALL = 419;
         private HubConnection hubConnection;
+        OpenFileDialog openFileDialog1 = new OpenFileDialog();
         async Task MakeCommit()
         {
             var lines = File.ReadAllLines("..\\..\\..\\..\\..\\..\\..\\MakeCommits\\commit_messages.txt");
@@ -52,7 +54,7 @@ namespace ChiefTabberUI
         {
             InitializeComponent();
             this.hubConnection = new HubConnectionBuilder()
-                .WithUrl("http://0b3fdabf.ngrok.io/homehub")
+                .WithUrl("http://07b9f0d5.ngrok.io/homehub")
                 .Build();
            this.hubConnection.On("HideWindows", () =>
             {
@@ -83,7 +85,10 @@ namespace ChiefTabberUI
                     System.Media.SoundPlayer player = new System.Media.SoundPlayer(Resources.keyboard);
                     player.PlayLooping();
                 }
-                if (this.CheckboxHackerTyper.Checked) { 
+                if (this.CheckboxProgram.Checked)
+                {
+                    Process.Start(openFileDialog1.FileName);
+                }
                 var options = new ChromeOptions();
                 options.AddExcludedArgument("enable-automation");
                 options.AddAdditionalCapability("useAutomationExtension", false);
@@ -92,14 +97,26 @@ namespace ChiefTabberUI
                     switch (i)
                     {
                         case 1:
-                            using (var driver = new FirefoxDriver()) { HackerTyper(driver); };
-                            break;
+                        if (this.CheckboxHackerTyper.Checked)
+                        {
+                           using (var driver = new FirefoxDriver()) { HackerTyper(driver); };
+                        }
+                        if (this.CheckboxStockMarket.Checked)
+                        {
+                            using (var driver = new FirefoxDriver()) { OpenWebsite(driver, "https://money.cnn.com/data/markets/"); };
+                        }
+                        break;
                         case 2:
+                        if (this.CheckboxHackerTyper.Checked)
+                        {
                             using (var driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))) { HackerTyper(driver); };
-                            break;
+                        }
+                        if (this.CheckboxStockMarket.Checked)
+                        {
+                            using (var driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))) { OpenWebsite(driver, "https://money.cnn.com/data/markets/"); };
+                        }
+                        break;
                     }
-
-                }
             });
         }
     public void HackerTyper(RemoteWebDriver driver)
@@ -124,6 +141,13 @@ namespace ChiefTabberUI
             }
         }
     }
+    public void OpenWebsite(RemoteWebDriver driver, string url)
+        {
+            driver.Navigate().GoToUrl(url);
+            Actions actiddon = new Actions(driver);
+            actiddon.SendKeys("{F11}");
+            actiddon.Perform();
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             Task.Run(async () =>
@@ -145,6 +169,15 @@ namespace ChiefTabberUI
         private void ButtonCommit_Click_1(object sender, EventArgs e)
         {
             MakeCommit();
+        }
+
+        private void ButtonBrowse_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string browsefilename = openFileDialog1.FileName;
+            }
         }
     }
 }
