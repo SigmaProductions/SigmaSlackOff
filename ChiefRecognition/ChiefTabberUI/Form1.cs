@@ -65,7 +65,7 @@ namespace ChiefTabberUI
                     {
                         try
                         {
-                            MakeCommit();
+                            await MakeCommit();
                             await Task.Delay(55000);
                         }
                         catch (Exception)
