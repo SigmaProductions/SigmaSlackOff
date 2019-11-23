@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { range } from 'rxjs';
-import { Lobby } from './lobby.model';
 import { DxRangeSliderComponent } from 'devextreme-angular';
+import { HttpClient } from "@angular/common/http"
+import { Room } from '../models/room.model';
 
 @Injectable()
 export class DataService{
+    constructor(private httpClient: HttpClient){}
+
     createRandom(){
-        let randoms: Lobby[];
+        let randoms: Room[];
         randoms=[];
         for(var i=0; i<10; i++){
-            var lobb= new Lobby();
+            var lobb= new Room();
             lobb.game="dfd";
-            lobb.name="daD";
             randoms.push(lobb);
         }
         return randoms;
     }
 
     getData(){
-        return this.createRandom();
+        return this.httpClient.get<Array<Room>>("https://localhost:5001/api/Room/getrooms");
+        
     }
 }

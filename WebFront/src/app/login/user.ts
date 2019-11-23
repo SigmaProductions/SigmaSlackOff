@@ -1,5 +1,5 @@
 
 export class User{
-    public Username:string;
-    public Password:string;
+    static Username:string;
+    static Password:string;
 }

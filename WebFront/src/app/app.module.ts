@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { LobbiesComponent } from './lobbies/lobbies.component';
 import { DataService } from './lobbies/data.service';
 import { CoolthanksComponent } from './coolthanks/coolthanks.component';
+import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   {
@@ -46,11 +47,12 @@ const appRoutes: Routes = [
     ),
     DxButtonModule,
     DxTextBoxModule,
+    HttpClientModule,
     DxListModule,
     DxDataGridModule,
     BrowserModule
   ],
-  providers: [DataService],
+  providers: [DataService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
