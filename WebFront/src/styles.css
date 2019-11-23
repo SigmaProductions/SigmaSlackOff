@@ -28,3 +28,5 @@ html * {
     bottom: 0;
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
   } 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
