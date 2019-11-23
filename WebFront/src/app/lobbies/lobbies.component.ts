@@ -17,9 +17,6 @@ export class LobbiesComponent implements OnInit {
   constructor(private dataService: DataService, private router:Router, private httpClient: HttpClient) { 
     this.dataService.getData().toPromise().then((val)=>{
       this.data= val
-      for (var item in this.data){
-        item.
-      }
     });
   }
   joinClick(e){ 

@@ -5,7 +5,8 @@ selectionMode="single"
 >
         <dxi-item *ngFor="let item of data" >
             <div id="game">{{item.game}}</div>
-            
+            <div>{{item.date}}</div>
+
         </dxi-item>
     </dx-list>
     <dx-button id="join" (onClick)="joinClick($event)" >Dołącz</dx-button>
