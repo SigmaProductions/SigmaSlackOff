@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoginComponent } from '../login/login.component';
 import { DxListComponent } from 'devextreme-angular';
-import { userInfo } from 'os';
+
 
 @Component({
   selector: 'app-lobbies',
