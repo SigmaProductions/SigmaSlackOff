@@ -1,6 +1,7 @@
 ﻿using Amazon.Rekognition;
 using Amazon.Rekognition.Model;
 using Amazon.Runtime;
+using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +16,7 @@ namespace ChiefRecognition
         public string sourceImage { get; set; }
         public string targetImage { get; set; }
 
-        public async Task<bool> IsSimillarFaceOnSourceImage()
+        public async Task<bool> IsSimillarFaceOnSourceImage(HubConnection hubConnection)
         {
             AmazonRekognitionClient rekognitionClient = new AmazonRekognitionClient("AKIA3GGXKFL7TG4ARQ5F", "iXqBARX00AiblMAAfvOIp6tKdwRrd/bQlvTicUcq",Amazon.RegionEndpoint.EUWest1);
 
@@ -41,21 +42,28 @@ namespace ChiefRecognition
                 TargetImage = imageTarget,
                 SimilarityThreshold = similarityThreshold
             };
-
-            CompareFacesResponse compareFacesResponse = await rekognitionClient.CompareFacesAsync(compareFacesRequest);
-            foreach (CompareFacesMatch match in compareFacesResponse.FaceMatches)
+            try
             {
-                ComparedFace face = match.Face;
-                BoundingBox position = face.BoundingBox;
-                Console.WriteLine("Face at " + position.Left
-                      + " " + position.Top
-                      + " matches with " + match.Similarity
-                      + "% confidence.");
+                CompareFacesResponse compareFacesResponse = await rekognitionClient.CompareFacesAsync(compareFacesRequest);
+                foreach (CompareFacesMatch match in compareFacesResponse.FaceMatches)
+                {
+                    ComparedFace face = match.Face;
+                    BoundingBox position = face.BoundingBox;
+                    Console.WriteLine("Face at " + position.Left
+                          + " " + position.Top
+                          + " matches with " + match.Similarity
+                          + "% confidence.");
+                    await hubConnection.SendAsync("HideWindows");
+                }
+
+                Console.WriteLine("There was " + compareFacesResponse.UnmatchedFaces.Count + " face(s) that did not match");
+                return true;
             }
-
-            Console.WriteLine("There was " + compareFacesResponse.UnmatchedFaces.Count + " face(s) that did not match");
-
-            return true;
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
     }
 }
