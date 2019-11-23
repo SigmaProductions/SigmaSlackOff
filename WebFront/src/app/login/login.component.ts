@@ -12,14 +12,17 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent implements OnInit {
   userNickname="";
   userPassword="";
+  user: User;
+
   login(e){ 
-    this.httpClient.get("https://localhost:5001/api/User/login",
-    {"id":this.userNickname, "pw": this.userPassword});
-    this.router.navigateByUrl('/test');
+    this.httpClient.get("https://localhost:5001/api/User/login"+ "?username=" + this.userNickname+ '&pw='
+      + this.userPassword).subscribe((us)=> {
+        this.user= us;
+        this.router.navigateByUrl('/test');
+      }, 
+      (err)=>{ console.log(err) });
     
   }
-
-  user:User;
   constructor(private router:Router, private httpClient: HttpClient) { 
 
   }
