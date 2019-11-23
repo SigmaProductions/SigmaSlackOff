@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace matcher.Migrations
 {
-    public partial class AddItems : Migration
+    public partial class @new : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,8 +25,8 @@ namespace matcher.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    name = table.Column<string>(nullable: false),
-                    password = table.Column<string>(nullable: false),
+                    name = table.Column<string>(nullable: true),
+                    password = table.Column<string>(nullable: true),
                     roomId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
