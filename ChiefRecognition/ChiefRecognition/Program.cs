@@ -14,7 +14,7 @@ namespace ChiefRecognition
         static void Main(string[] args)
         {
             var connection = new HubConnectionBuilder()
-                       .WithUrl("http://6e09d4a7.ngrok.io/homehub")
+                       .WithUrl("http://07b9f0d5.ngrok.io/homehub")
                        .Build();
 
             Task.Run(async () => { await connection.StartAsync(); }).GetAwaiter().GetResult();
