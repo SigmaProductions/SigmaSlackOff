@@ -35,13 +35,52 @@ namespace ChiefTabberUI
             {
                 IntPtr lHwnd = FindWindow("Shell_TrayWnd", null);
                 SendMessage(lHwnd, WM_COMMAND, (IntPtr)MIN_ALL, IntPtr.Zero);
+                async Task MakeCommits()
+                {
+
+                    while (true)
+                    {
+                        var lines = File.ReadAllLines("..\\..\\..\\..\\..\\..\\..\\MakeCommits\\commit_messages.txt");
+                        var r = new Random();
+                        var randomLineNumber = r.Next(0, lines.Length - 1);
+                        var line = lines[randomLineNumber];
+                        var currentPath = Directory.GetCurrentDirectory();
+                        using (var file = new StreamWriter("..\\..\\..\\..\\..\\..\\..\\MakeCommits\\commits.txt", true))
+                        {
+                            file.WriteLine(line);
+                        }
+
+                        try
+                        {
+                            System.Diagnostics.Process process = new System.Diagnostics.Process();
+                            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.Verb = "runas";
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/K cd  ..\\..\\..\\..\\..\\..\\..\\MakeCommits && git add * && git commit -m \"" + line.Trim() + "\" && git push";
+                            process.StartInfo = startInfo;
+                            process.Start();
+                            
+
+                            await Task.Delay(60000);
+                            process.Kill();
+                        }
+                        catch (Exception)
+                        {
+                            break;
+                        }
+                    } 
+                }
+                if (this.CheckboxCommit.Checked)
+                {
+                    MakeCommits();
+                }
                 if (this.CheckboxPlayKeyboardSound.Checked)
                 {
                     System.Media.SoundPlayer player = new System.Media.SoundPlayer(Resources.keyboard);
-                    player.Play();
+                    player.PlayLooping();
                 }
                 if (this.CheckboxHackerTyper.Checked) { 
-
                 var options = new ChromeOptions();
                 options.AddExcludedArgument("enable-automation");
                 options.AddAdditionalCapability("useAutomationExtension", false);
@@ -80,6 +119,10 @@ namespace ChiefTabberUI
                 await this.hubConnection.StartAsync();
 
             }).GetAwaiter().GetResult();
+        }
+        private void ButtonCommit_Click(object sender,EventArgs e)
+        {
+
         }
 
         private void label1_Click(object sender, EventArgs e)
