@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Amazon.Rekognition;
 using Amazon.Rekognition.Model;
 using Microsoft.AspNet.SignalR.Infrastructure;
 using Microsoft.AspNetCore.SignalR.Client;
+using OpenCvSharp;
 
 namespace ChiefRecognition
 {
@@ -11,22 +13,28 @@ namespace ChiefRecognition
     {
         static void Main(string[] args)
         {
-            //var comparer = new FaceComparer();
-            //comparer.sourceImage = "girlresized.jpg";
-            //comparer.targetImage = "girlsresized.jpg";
-            //Task.Run(async () =>
-            //{
-            //    await comparer.IsSimillarFaceOnSourceImage();
-            //}).GetAwaiter().GetResult();
-
             var connection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:44354/homehub")
-                .Build();
+                       .WithUrl("http://0b3fdabf.ngrok.io/homehub")
+                       .Build();
 
             Task.Run(async () => { await connection.StartAsync(); }).GetAwaiter().GetResult();
-            connection.SendAsync("HideWindows");
-            Console.WriteLine("Hello World!");
-            Console.ReadLine();
+
+            while (true)
+            {
+                VideoCapture capture = new VideoCapture(0); //assumption based on how actual openCV works.
+                var screen = capture.RetrieveMat();
+                screen.SaveImage("myimage.jpg");
+                var comparer = new FaceComparer();
+                comparer.sourceImage = "xxx.jpg";
+                comparer.targetImage = "myimage.jpg";
+                Task.Run(async () =>
+                {
+                    await comparer.IsSimillarFaceOnSourceImage(connection);
+
+                }).GetAwaiter().GetResult();
+                Thread.Sleep(5000);
+                Console.WriteLine("Hello World!");
+            }
         }
     }
 }
