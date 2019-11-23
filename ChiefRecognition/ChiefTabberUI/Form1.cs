@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,8 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Media;
+using ChiefTabberUI.Properties;
 
 namespace ChiefTabberUI
 {
@@ -26,7 +28,6 @@ namespace ChiefTabberUI
         public Form1()
         {
             InitializeComponent();
-
             this.hubConnection = new HubConnectionBuilder()
                 .WithUrl("https://localhost:44354/homehub")
                 .Build();
@@ -34,11 +35,18 @@ namespace ChiefTabberUI
             {
                 IntPtr lHwnd = FindWindow("Shell_TrayWnd", null);
                 SendMessage(lHwnd, WM_COMMAND, (IntPtr)MIN_ALL, IntPtr.Zero);
+                if (this.CheckboxPlayKeyboardSound.Checked)
+                {
+                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(Resources.keyboard);
+                    player.Play();
+                }
+                if (this.CheckboxHackerTyper.Checked) { 
+
                 var options = new ChromeOptions();
                 options.AddExcludedArgument("enable-automation");
                 options.AddAdditionalCapability("useAutomationExtension", false);
                 options.AddArgument("--kiosk");
-                using (var driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), options))
+                using (var driver = new FirefoxDriver())
                 {
                     driver.Navigate().GoToUrl("http://hackertyper.com");
                     var console = driver.FindElementById("console");
@@ -61,7 +69,7 @@ namespace ChiefTabberUI
                        
                     }
                 }
-                    //Thread.Sleep(1);
+                }  //Thread.Sleep(1);
             });
         }
 
