@@ -1,0 +1,15 @@
+#gridContainer{
+    align-content: center;
+    width: 100%;
+}
+#list{
+    background-color: white;
+    color: black;
+}
+#nameText{
+    color:black;
+    background-color: red;
+}
+dx-list{
+    height: 500px;
+}

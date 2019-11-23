@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './user';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -12,10 +13,12 @@ export class LoginComponent implements OnInit {
   userPassword="";
   login(e){ 
     console.log("dziala");
+    this.router.navigateByUrl('/test');
+    
   }
 
   user:User;
-  constructor() { 
+  constructor(private router:Router) { 
 
   }
 
