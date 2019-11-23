@@ -33,17 +33,17 @@ namespace matcher.Controllers
         }
         [HttpGet]
         [Route("login")]
-        public async Task<IActionResult> Login(string id, string pw)
+        public async Task<IActionResult> Login(string username, string pw)
         {
             var _context = new ApplicationDbContext(
                new Microsoft.EntityFrameworkCore.DbContextOptions<ApplicationDbContext>());
             var rooms = await _context.Rooms.ToListAsync();
             await _context.UserPreferences.ToListAsync();
             var users = await _context.Users.ToListAsync();
-            var user = _context.Users.Find(id);
+            var user = _context.Users.FirstOrDefault(x=> x.name == username);
             if (user.password == pw)
             {
-                return Ok();
+                return Ok(user);
             }
             return Conflict("Bad password");
         }

@@ -52,7 +52,11 @@ namespace ChiefTabberUI
         {
             InitializeComponent();
             this.hubConnection = new HubConnectionBuilder()
+<<<<<<< HEAD
                 .WithUrl("http://localhost:5000/homehub")
+=======
+                .WithUrl("http://b9aa300d.ngrok.io/homehub")
+>>>>>>> 073b4eaff0a87bc6db13d6482ce8e59188ba2678
                 .Build();
            this.hubConnection.On("HideWindows", () =>
             {

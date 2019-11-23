@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from './user';
 import {Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../models/user.model';
 
 
 @Component({
@@ -11,14 +12,18 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   userNickname="";
   userPassword="";
+  static user: User;
+
   login(e){ 
-    console.log("dziala");
-    this.router.navigateByUrl('/test');
+    this.httpClient.get("https://localhost:5001/api/User/login"+ "?username=" + this.userNickname+ '&pw='
+      + this.userPassword).subscribe((us: User)=> {
+        LoginComponent.user= us;
+        this.router.navigateByUrl('/test');
+      }, 
+      (err)=>{ console.log(err) });
     
   }
-
-  user:User;
-  constructor(private router:Router) { 
+  constructor(private router:Router, private httpClient: HttpClient) { 
 
   }
 

@@ -1,6 +1,9 @@
-<dx-list >
+<dx-list [(selectedItems)]="selectedItems"
+[showSelectionControls]="true"
+selectionMode="single"
+>
         <dxi-item *ngFor="let item of data" >
-            <h2>{{item.name}}</h2>
+            <div id="game">{{item.game}}</div>
         </dxi-item>
     </dx-list>
-    <dx-button id="join" (onClick)="joinClick($event)">Dołącz</dx-button>
+    <dx-button id="join" (onClick)="joinClick($event)" >Dołącz</dx-button>
