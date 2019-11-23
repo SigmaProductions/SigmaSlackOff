@@ -11,17 +11,17 @@ namespace matcher.Controllers
     [Route("api/[controller]")]
     public class RoomController : Controller
     {
-        private readonly ApplicationDbContext _context;
         public RoomController()
         {
-            _context = new ApplicationDbContext(
-                new Microsoft.EntityFrameworkCore.DbContextOptions<ApplicationDbContext>());
         }
 
         [HttpGet]
         [Route("getrooms")]
         public async Task<IActionResult> Get()
         {
+            var _context = new ApplicationDbContext(
+               new Microsoft.EntityFrameworkCore.DbContextOptions<ApplicationDbContext>());
+
             return Ok(_context.Rooms.ToList());
         }
 
@@ -29,7 +29,8 @@ namespace matcher.Controllers
         [Route("add")]
         public async Task<IActionResult> AddRoom(Room room)
         {
-            room.Id = (_context.Rooms.Count<Room>() + 1).ToString();
+            var _context = new ApplicationDbContext(
+               new Microsoft.EntityFrameworkCore.DbContextOptions<ApplicationDbContext>());
             _context.Rooms.Add(room);
             await _context.SaveChangesAsync();
             return Ok();
@@ -37,10 +38,12 @@ namespace matcher.Controllers
 
         [HttpPut]
         [Route("assignUser")]
-        public async Task<IActionResult> AssignUser(string roomId, string userId)
+        public async Task<IActionResult> AssignUser(int roomId, int userId)
         {
-            var room = _context.Rooms.Find(roomId);
-            var user = _context.Users.Find(userId);
+            var _context = new ApplicationDbContext(
+               new Microsoft.EntityFrameworkCore.DbContextOptions<ApplicationDbContext>());
+            var room = _context.Rooms.FirstOrDefault(x => x.Id == roomId);
+            var user = _context.Users.FirstOrDefault(x=> x.Id == userId);
             if (room == null){
                 return NotFound("Room not found");
             }
@@ -49,7 +52,6 @@ namespace matcher.Controllers
                 return NotFound("User not found");
             }
             user.room = room;
-            room.users.Add(user);
             await _context.SaveChangesAsync();
             return Ok();
         }

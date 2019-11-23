@@ -12,9 +12,8 @@ namespace matcher
         {
             this.time = DateTime.Now;
         }
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string game { get; set; }
         public DateTime time { get; set; }
-        public User user { get; set; }
     }
 }

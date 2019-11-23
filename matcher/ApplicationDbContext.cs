@@ -25,14 +25,6 @@ namespace matcher
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Room>()
-                .HasMany(c => c.users)
-                .WithOne(e => e.room);
-            builder.Entity<User>().HasOne(x => x.room).WithMany(y => y.users);
-
-            builder.Entity<User>()
-                .HasMany(c => c.preferences)
-                .WithOne(e => e.user);
 
         }
         public DbSet<User> Users { get; set; }
