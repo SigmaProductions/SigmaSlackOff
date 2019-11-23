@@ -32,6 +32,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.CheckboxHackerTyper = new System.Windows.Forms.CheckBox();
             this.CheckboxPlayKeyboardSound = new System.Windows.Forms.CheckBox();
+            this.CheckboxCommit = new System.Windows.Forms.CheckBox();
+            this.ButtonCommit = new System.Windows.Forms.Button();
             // 
             // button1
             // 
@@ -72,11 +74,33 @@
             this.CheckboxPlayKeyboardSound.Text = "Play keyboard sound";
             this.CheckboxPlayKeyboardSound.UseVisualStyleBackColor = true;
             // 
+            // CheckboxCommit
+            // 
+            this.CheckboxCommit.AutoSize = true;
+            this.CheckboxCommit.Location = new System.Drawing.Point(74, 164);
+            this.CheckboxCommit.Name = "CheckboxCommit";
+            this.CheckboxCommit.Size = new System.Drawing.Size(128, 24);
+            this.CheckboxCommit.TabIndex = 4;
+            this.CheckboxCommit.Text = "Make commits";
+            this.CheckboxCommit.UseVisualStyleBackColor = true;
+            // 
+            // ButtonCommit
+            // 
+            this.ButtonCommit.Location = new System.Drawing.Point(74, 371);
+            this.ButtonCommit.Name = "ButtonCommit";
+            this.ButtonCommit.Size = new System.Drawing.Size(241, 51);
+            this.ButtonCommit.TabIndex = 5;
+            this.ButtonCommit.Text = "Make random commit";
+            this.ButtonCommit.UseVisualStyleBackColor = true;
+            this.ButtonCommit.Click += new System.EventHandler(this.ButtonCommit_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ButtonCommit);
+            this.Controls.Add(this.CheckboxCommit);
             this.Controls.Add(this.CheckboxPlayKeyboardSound);
             this.Controls.Add(this.CheckboxHackerTyper);
             this.Controls.Add(this.button2);
@@ -93,6 +117,8 @@
         private System.Windows.Forms.TextBox textBoxTimeMinimized;
         private System.Windows.Forms.CheckBox CheckboxHackerTyper;
         private System.Windows.Forms.CheckBox CheckboxPlayKeyboardSound;
+        private System.Windows.Forms.CheckBox CheckboxCommit;
+        private System.Windows.Forms.Button ButtonCommit;
     }
 }
 

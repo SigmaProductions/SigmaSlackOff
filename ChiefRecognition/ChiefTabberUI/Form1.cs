@@ -25,6 +25,28 @@ namespace ChiefTabberUI
         const int WM_COMMAND = 0x111;
         const int MIN_ALL = 419;
         private HubConnection hubConnection;
+        async Task MakeCommit()
+        {
+            var lines = File.ReadAllLines("..\\..\\..\\..\\..\\..\\..\\MakeCommits\\commit_messages.txt");
+            var r = new Random();
+            var randomLineNumber = r.Next(0, lines.Length - 1);
+            var line = lines[randomLineNumber];
+            var currentPath = Directory.GetCurrentDirectory();
+            using (var file = new StreamWriter("..\\..\\..\\..\\..\\..\\..\\MakeCommits\\commits.txt", true))
+            {
+                file.WriteLine(line);
+            }
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.Verb = "runas";
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/K cd  ..\\..\\..\\..\\..\\..\\..\\MakeCommits && git add * && git commit -m \"" + line.Trim() + "\" && git push";
+            process.StartInfo = startInfo;
+            process.Start();
+            await Task.Delay(5000);
+            process.Kill();
+        }
         public Form1()
         {
             InitializeComponent();
@@ -35,13 +57,32 @@ namespace ChiefTabberUI
             {
                 IntPtr lHwnd = FindWindow("Shell_TrayWnd", null);
                 SendMessage(lHwnd, WM_COMMAND, (IntPtr)MIN_ALL, IntPtr.Zero);
+                async Task MakeCommits()
+                {
+
+                    while (true)
+                    {
+                        try
+                        {
+                            MakeCommit();
+                            await Task.Delay(55000);
+                        }
+                        catch (Exception)
+                        {
+                            break;
+                        }
+                    } 
+                }
+                if (this.CheckboxCommit.Checked)
+                {
+                    MakeCommits();
+                }
                 if (this.CheckboxPlayKeyboardSound.Checked)
                 {
                     System.Media.SoundPlayer player = new System.Media.SoundPlayer(Resources.keyboard);
-                    player.Play();
+                    player.PlayLooping();
                 }
                 if (this.CheckboxHackerTyper.Checked) { 
-
                 var options = new ChromeOptions();
                 options.AddExcludedArgument("enable-automation");
                 options.AddAdditionalCapability("useAutomationExtension", false);
@@ -81,10 +122,19 @@ namespace ChiefTabberUI
 
             }).GetAwaiter().GetResult();
         }
+        private void ButtonCommit_Click(object sender,EventArgs e)
+        {
+
+        }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ButtonCommit_Click_1(object sender, EventArgs e)
+        {
+            MakeCommit();
         }
     }
 }
